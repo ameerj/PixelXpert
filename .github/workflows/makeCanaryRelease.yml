@@ -1,6 +1,7 @@
 name: Make Canary Release
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'canary'

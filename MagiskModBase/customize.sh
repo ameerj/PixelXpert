@@ -76,8 +76,14 @@ assertPixelRom()
   if ! find "$PixelTipsParent" -maxdepth 1 -name "$PixelTipsPattern" -print -quit | grep -q .; then
   	ui_print 'Device does not seem to be a Pixel'
   	ui_print 'phone, containing an original ROM.'
-
-    abort 'Installation aborted due to incompatibility'
+  	ui_print 'Install at your own risk!!'
+	ui_print ''
+	ui_print 'Do you wish to continue?'
+	ui_print 'Volume Up: Continue'
+	ui_print 'Volume Down: Abort'
+	if [[ "$(getevent -l | grep -m 1 KEY_VOLUME)" == *"VOLUMEDOWN"* ]]; then
+		abort 'Installation cancelled'
+	fi;
   fi
 }
 
